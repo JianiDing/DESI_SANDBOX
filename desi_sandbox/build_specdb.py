@@ -78,6 +78,7 @@ def reading_data(resol, zlow, zhigh):
 
 
     specf = spec(np.vstack(np.array(wavetotal)), np.vstack(np.array(fluxt)), np.vstack(np.array(ivar)), np.concatenate(z), np.concatenate(zerr))
+    # TODO -- The third entry is the error array, not the inverse variance.  Fix this
     sp = XSpectrum1D(specf.wave, specf.flux, specf.ivar, verbose=False)
 
     binspec = ltsu.rebin_to_rest(sp, np.zeros(len(np.array(specf.wave))), resol * u.km / u.s)
