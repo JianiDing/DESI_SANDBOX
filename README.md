@@ -1,2 +1,6 @@
 # DESI_SANDBOX
-A package used to create the input file from DESI Mock Spectra for the CNN DLA finder and evaluate the predicted result from the CNN Algorithm
+This is a package for:
+- Create the input file based on the DESI Mock Spectra for the CNN DLA finder
+- Evaluate the predicted result from the CNN Algorithm.
+
+
