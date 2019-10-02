@@ -4,4 +4,4 @@ This is a package for:
 - Evaluate the predicted result from the CNN DLA finder Algorithm
 
 The information for the CNN DLA finder Algorithm is listed here:
-(Github Reporsitory)[https://github.com/davidparks21/qso_lya_detection_pipeline]
+https://github.com/davidparks21/qso_lya_detection_pipeline
