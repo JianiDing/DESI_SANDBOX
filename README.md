@@ -10,7 +10,7 @@ python setup.py develop
 ```
 
 ## Basic Usage 
-```
+
 DLA_meta_build: 
 Used to create DLA catalog from the CNN DLA Finder predictions. 
 cpm: 
