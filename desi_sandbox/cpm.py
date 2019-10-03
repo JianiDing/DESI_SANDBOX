@@ -86,9 +86,9 @@ class dlametacnn:
                 middlai.append(data[ii]['id'])
             self.NHI.append(np.ravel(dlanhi))
             self.z.append(np.ravel(z_dlai))
-            self.dlac.append(np.ravel(dlaci))  #
+            self.dlac.append(np.ravel(dlaci))  
             self.dlaid.append(np.ravel(middlai))
-                # m
+                
 
             for kk in range(0, len(data[ii]['subdlas'])):
                 subdlanhi.append(data[ii]['subdlas'][kk]['column_density'])
@@ -98,7 +98,7 @@ class dlametacnn:
                 midsubdlai.append(data[ii]['id'])
             self.subNHI.append(np.ravel(subdlanhi))
             self.subz.append(np.ravel(z_subdlai))
-            self.subdlac.append(np.ravel(subdlaci))  #
+            self.subdlac.append(np.ravel(subdlaci))  
             self.subdlaid.append(np.ravel(midsubdlai))
 
         return zqso,mid
