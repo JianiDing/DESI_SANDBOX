@@ -23,8 +23,8 @@ python setup.py develop
 ### desi_meta_v05:
 - hdf5_writter: Used to write the hdf5 file storing the mock spectra (input of the DLA finder)
 ### undetect_DLA_inspection:
-- miss_id_check: Checking the false positive and negative spectra
-- plotting: Plotting the false positive and negative spectra
+- miss_id_check: Checking the false positive and false negative spectra
+- plotting: Plotting the false positive and false negative spectra
 
 
 
