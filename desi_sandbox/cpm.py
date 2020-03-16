@@ -188,20 +188,21 @@ def match_rate(dlacnnmeta, dlacnnid, dlacor, con, nhi):
     return count / len(totalmiddla), count / len(cutid) #dlacortmock
 
 
-def confusion_matrix(TP,FP,FN,TN):
+def confusion_matrix(TP,FP,FN,TN,version):
     '''
        Function for plotting confusion matrix for the CNN performance results
        :param TP float or int: true positive for the results
        :param FP float or int: false positive for the results
        :param FN float or int: false negative for the results
        :param TN float or int: true negative since true negative cannot be defined om this case so it is NaN
+       :param: version of the mock that used to compute the confusion matrix 
        :return: plots for the confusion matrix
     '''
     plt.clf()
     cm =  [[TP, FP], [FN,TN]]
     plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
     classNames = ['Positive','Negative']
-    plt.title('Confusion Matrix - v5.0-quick2.4 Data')
+    plt.title('Confusion Matrix - '+ str(version)+' Data')
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
     tick_marks = np.arange(len(classNames))
