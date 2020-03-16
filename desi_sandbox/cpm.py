@@ -129,17 +129,20 @@ def dla_output(path):
 
 
 
-
-def match_rate(dlacnnmeta, dlacor, con, nhi):
+def match_rate(dlacnnmeta, dlacnnid, dlacor, con, nhi):
     '''
     Function for matching DLAs detected by the CNN code and the DESI MOCK DLA Catalog
     :param dlacnnmeta object: meta or DLAs detected by the CNN code
-    :param dlacor float: meta from DESI Mock DLA Catalog
+    :param dlacnnid : mockid for sightlights 
+    :param dlacor object: meta from DESI Mock DLA Catalog
     :param con: confidence level cut for matching
     :param nhi: NHI cut for matching
     :return:1. purity percentage  2. completeness percentage 3. meta for matched DLAs
     '''
-
+    dlazcut = dlacor.z[np.isin(dlacor.mockid, dlacnnid)]
+    dlanhicut = dlacor.NHI[np.isin(dlacor.mockid, dlacnnid)]
+    dlaidcut = dlacor.mockid[np.isin(dlacor.mockid, dlacnnid)]
+    
     totalmiddla = np.append(np.concatenate(dlacnnmeta.dlaid)[
                                 (np.concatenate(dlacnnmeta.NHI) > nhi) & (np.concatenate(dlacnnmeta.dlac) > con)],
                             np.concatenate(dlacnnmeta.subdlaid)[
@@ -155,6 +158,8 @@ def match_rate(dlacnnmeta, dlacor, con, nhi):
     # totalmiddla= np.concatenate(dlacnnmeta.dlaid)
     # totalnhi = np.concatenate(dlacnnmeta.NHI)
     # totalz = np.concatenate(dlacnnmeta.z)
+   
+    
     dlacortid = []
     dlacortz = []
     dlacortnh = []
@@ -165,20 +170,23 @@ def match_rate(dlacnnmeta, dlacor, con, nhi):
     count = 0
     idt = []
     print(len(totalmiddla), len(np.array(dlacor.dlaid)))
-    cut = dlacor.dlaid[dlacor.NHI > nhi]
+    cutid = dlaidcut[dlanhicut > nhi]
+    cutnhi = dlanhicut[dlanhicut > nhi]
+    cutz = dlazcut[dlanhicut > nhi]
+    print (len(cutid))
     # cut2 = dla
     for ii in range(0, len(totalmiddla)):
-        for jj in range(0, len(np.array(dlacor.dlaid))):
-            if (dlacor.NHI[jj] > nhi) & (totalmiddla[ii] == dlacor.mockid[jj]) & (
-                    abs(totalnhi[ii] - dlacor.NHI[jj]) < 0.5) & (abs(totalz[ii] - dlacor.z[jj]) < 0.01):
+        for jj in range(0, len(cutid)):
+            if (totalmiddla[ii] == cutid[jj]) & (
+                    abs(totalnhi[ii] - cutnhi[jj]) < 0.56) & (abs(totalz[ii] - cutz[jj]) < 0.015):
                 count = count + 1
-                dlacortid.append(np.array(dlacor.dlaid[jj]))
-                dlacortz.append(np.array(dlacor.z[jj]))
-                dlacortnh.append(np.array(dlacor.NHI[jj]))
-                dlacortmock.append(np.array(dlacor.mockid[jj]))
+                #dlacortid.append(np.array(dlacor.dlaid[jj]))
+                #dlacortz.append(np.array(dlacor.z[jj]))
+                #dlacortnh.append(np.array(dlacor.NHI[jj]))
+                #dlacortmock.append(np.array(dlacor.mockid[jj]))
+    print (count)
+    return count / len(totalmiddla), count / len(cutid) #dlacortmock
 
-    return count / len(totalmiddla), count / len(np.array(dlacor.dlaid)), dlacortmock
-# dlameta(dlacortz,dlacortnh,dlacortid,dlacortmock)
 
 def confusion_matrix(TP,FP,FN,TN):
     '''
